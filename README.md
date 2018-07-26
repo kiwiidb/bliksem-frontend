@@ -1,6 +1,6 @@
 # bliksem
 
-> Frontend for interacting with lnd
+> Frontend for interacting with bliksem, go server for interacting with lnd
 
 ## Build Setup
 
