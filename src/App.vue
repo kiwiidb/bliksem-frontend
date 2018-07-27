@@ -1,26 +1,34 @@
 <template>
-<div>
 <v-app>
 <body >
 <h1 align="center" id="header">Give me some money, thanks.</h1>
   <div align="center">
 <v-btn @click="getInvoice($event, '1000')">
-1000 sats
+1000 Sats
 </v-btn>
 <v-btn @click="getInvoice($event, '10000')">
-10000 sats
+10.000 Sats
 </v-btn>
 <v-btn @click="getInvoice($event, '100000')">
-100000 sats
+100.000 Sats
 </v-btn>
+  </div>
+  <div align="center">
+    <img src="static/first.gif" style="width:110px;height:80px;margin:8px">
+    <img src="static/second.gif" style="width:117px;height:80px;margin:8px">
+    <img src="static/third.gif" style="width:126px;height:80px;margin:8px">
   </div>
 <div id="wrapper" >
 <div id="first" v-show="invoice != ''">Invoice for {{ value_invoice }} satoshis: {{ invoice }}</div>
 <qrcode-vue v-show="invoice != ''" id="second" :value=invoice size=150></qrcode-vue>
 </div>
 </body>
-</v-app>
+<div class="footer">
+  <a href="https://twitter.com/kiwiidb">My Twitter</a>
+
+  <a href="https://github.com/kiwiidb">My Github</a>
 </div>
+</v-app>
 </template>
 
 <script>
@@ -83,5 +91,14 @@ export default {
 }
 #second {
     overflow: hidden; /* if you don't want #second to wrap below #first */
+}
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }
 </style>
