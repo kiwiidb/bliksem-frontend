@@ -1,5 +1,6 @@
 <template>
 <v-app>
+<vue-snotify></vue-snotify>
 <body >
 <h1 align="center" id="header">Give me some money, thanks.</h1>
   <div align="center">
@@ -36,9 +37,15 @@ import axios from 'axios'
 import QrcodeVue from 'qrcode.vue'
 
 export default {
+  created: function () {
+    setInterval(() => {
+      this.getIfPaidSomething()
+    }, 1000)
+  },
   data () {
     return {
       invoice: '',
+      currentInvoiceIsPaid: false,
       value_invoice: '',
       errors: []
     }
@@ -54,20 +61,28 @@ export default {
         .catch(e => {
           this.errors.push(e)
         })
+    },
+    getIfPaidSomething: function (event) {
+      axios.post(`http://localhost:8081/settledinvoice`, {body: '"payment_request" : "' + this.invoice + '"'})
+        .then(response => {
+          if (response.data) {
+            this.simpleNotification()
+          }
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    },
+    simpleNotification: function (event) {
+      this.$snotify.success('Payment received! Thanks!', {
+        timeout: 2000,
+        showProgressBar: false,
+        closeOnClick: true
+      })
     }
   },
   components: {
     QrcodeVue
-  },
-  // Fetches posts when the component is created.
-  created () {
-    axios.get(`http://jsonplaceholder.typicode.com/posts`)
-      .then(response => {
-        this.posts = response.data
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
   }
 }
 

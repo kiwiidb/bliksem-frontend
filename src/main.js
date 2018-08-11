@@ -5,8 +5,11 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import Snotify from 'vue-snotify'
+import 'vue-snotify/styles/material.css'
 
 Vue.config.productionTip = false
+Vue.use(Snotify)
 Vue.use(Vuetify)
 
 /* eslint-disable no-new */
