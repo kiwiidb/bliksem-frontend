@@ -7,10 +7,13 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import Snotify from 'vue-snotify'
 import 'vue-snotify/styles/material.css'
+import VueClipboard from 'vue-clipboard2'
 
 Vue.config.productionTip = false
 Vue.use(Snotify)
 Vue.use(Vuetify)
+VueClipboard.config.autoSetContainer = true // add this line
+Vue.use(VueClipboard)
 
 /* eslint-disable no-new */
 new Vue({

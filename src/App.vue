@@ -22,6 +22,7 @@
 <div id="wrapper" >
 <div id="first" v-show="invoice != ''">Invoice for {{ value_invoice }} satoshis: {{ invoice }}</div>
 <qrcode-vue v-show="invoice != ''" id="second" :value=invoice size=150></qrcode-vue>
+<v-btn v-show="invoice != ''" v-clipboard:copy="invoice">Copy to clipboard</v-btn>
 </div>
 </body>
 <div class="footer">
