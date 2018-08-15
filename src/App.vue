@@ -46,7 +46,6 @@ export default {
   data () {
     return {
       invoice: '',
-      currentInvoiceIsPaid: false,
       value_invoice: '',
       errors: []
     }
@@ -64,15 +63,18 @@ export default {
         })
     },
     getIfPaidSomething: function (event) {
-      axios.post(`http://localhost:8081/settledinvoice`, {body: '"payment_request" : "' + this.invoice + '"'})
-        .then(response => {
-          if (response.data) {
-            this.simpleNotification()
-          }
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
+      if (this.invoice !== '') {
+        axios.post(`http://localhost:8081/settledinvoice`, {body: '"payment_request" : "' + this.invoice + '"'})
+          .then(response => {
+            if (response.data) {
+              this.invoice = ''
+              this.simpleNotification()
+            }
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
     },
     simpleNotification: function (event) {
       this.$snotify.success('Payment received! Thanks!', {
